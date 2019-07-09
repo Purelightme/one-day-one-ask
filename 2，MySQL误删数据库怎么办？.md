@@ -31,7 +31,7 @@ server-id=1
 
 #### 模拟添加数据，并且删除数据表users
 
-![2.4](https://raw.githubusercontent.com/Purelightme/one-day-one-ask/master/images/2.4.pngg)
+![2.4](https://raw.githubusercontent.com/Purelightme/one-day-one-ask/master/images/2.4.png)
 
 #### 恢复数据
 
