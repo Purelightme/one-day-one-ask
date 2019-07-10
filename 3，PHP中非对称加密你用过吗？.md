@@ -81,10 +81,6 @@ function decrypt_aes($str,$key) {
     return $str;
 }
 
-
-
-
-
 //pcks5解密
 function pkcs5Unpad($text) {
 
@@ -189,5 +185,108 @@ echo $encrypted."\n";
 openssl_public_decrypt(base64_decode($encrypted),$decrypted,$pu_key);
 echo $decrypted;
 ```
+
+### 快钱中使用的函数库(只能用于php7.1及以下版本，因为mcrpt扩展在7.2+已移除)
+
+```php
+<?php
+/**
+ * Created by PhpStorm.
+ * User: purelightme
+ * Date: 2019/2/19
+ * Time: 09:24
+ */
+
+//私钥加密RSAwithSHA1
+function crypto_seal_private($original_data){
+    $pfx_path =  config('kuaiqian.'.config('kuaiqian.env').'.pfx_path');//商户PFX证书地址
+    $key_password = config('kuaiqian.'.config('kuaiqian.env').'.key_password');//证书密码
+    $pfx_file='file://'.$pfx_path;
+    $pfx=file_get_contents($pfx_file);
+    $certs=array();
+    openssl_pkcs12_read($pfx,$certs,$key_password);
+    $privkey=$certs['pkey'];
+    openssl_sign($original_data,$signature,$privkey,OPENSSL_ALGO_SHA1);
+    return base64_encode($signature);
+}
+
+//公钥加密OPENSSL_PKCS1_PADDING
+function crypto_seal_pubilc($original_data){
+    $pubkey_path = config('kuaiqian.'.config('kuaiqian.env').'.public_key_path');//快钱公钥地址
+    $pubkey_file=$pubkey_path;
+    $pubkey=file_get_contents("file://".$pubkey_file);
+    openssl_public_encrypt($original_data,$signature,$pubkey,OPENSSL_PKCS1_PADDING);
+    return base64_encode($signature);
+}
+
+//私钥解密OPENSSL_PKCS1_PADDING
+function crypto_unseal_private($digitalEnvelope){
+    $pfx_path =  config('kuaiqian.'.config('kuaiqian.env').'.pfx_path');//商户PFX证书地址
+    $key_password = config('kuaiqian.'.config('kuaiqian.env').'.key_password');//证书密码
+    $pfx_file='file://'.$pfx_path;
+    $pfx=file_get_contents($pfx_file);
+    $certs=array();
+    openssl_pkcs12_read($pfx,$certs,$key_password);
+    $privkey=$certs['pkey'];
+    $digitalEnvelope = base64_decode($digitalEnvelope);
+    $res = openssl_private_decrypt($digitalEnvelope,$receiveKey,$privkey,OPENSSL_PKCS1_PADDING);
+//    dd($res);
+    return $receiveKey;
+}
+
+//AES加密
+function encrypt_aes($encrypt,$key){
+//    dd($key);
+    $size = mcrypt_get_block_size(MCRYPT_RIJNDAEL_128,MCRYPT_MODE_CBC);
+    $encrypt = pkcs5Pad($encrypt,$size);
+    $iv = "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0";
+    $passcrypt = mcrypt_encrypt(MCRYPT_RIJNDAEL_128, $key, $encrypt, MCRYPT_MODE_CBC,$iv);
+    $encode = base64_encode($passcrypt);
+    return $encode;
+}
+
+
+
+//pkcs5加密
+function pkcs5Pad($text,$blocksize){
+    $pad = $blocksize-(strlen($text)%$blocksize);
+    return $text.str_repeat(chr($pad),$pad);
+}
+
+
+//AES解密
+function decrypt_aes($str,$key) {
+    $str =  base64_decode($str);
+    $iv = "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0";
+    $or_data = mcrypt_decrypt(MCRYPT_RIJNDAEL_128, $key, $str, MCRYPT_MODE_CBC,$iv);
+    $str = pkcs5Unpad($or_data);
+    return $str;
+}
+
+
+//pcks5解密
+function pkcs5Unpad($text) {
+    $pad = ord($text{strlen($text)-1});
+    if ($pad>strlen($text))
+        return false;
+    if (strspn($text,chr($pad),strlen($text)-$pad)!=$pad)
+        return false;
+    return substr($text,0,-1*$pad);
+}
+
+//公钥验签
+function crypto_unseal_pubilc($signedData,$receiveData){
+    $pubkey_path = config('kuaiqian.'.config('kuaiqian.env').'.public_key_path');//快钱公钥地址
+    $MAC = base64_decode($signedData);
+    $fp = fopen($pubkey_path, "r");
+    $cert = fread($fp, 8192);
+    fclose($fp);
+    $pubkeyid = openssl_get_publickey($cert);
+    $ok = openssl_verify($receiveData, $MAC, $pubkeyid);
+    return $ok;
+}
+```
+
+
 
 ```2019-07-10```
