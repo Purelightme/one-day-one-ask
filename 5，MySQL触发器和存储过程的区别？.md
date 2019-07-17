@@ -54,7 +54,7 @@ UPDATE `user` SET name='test' where id=1;
 
 ![5.1](https://raw.githubusercontent.com/Purelightme/one-day-one-ask/master/images/5.1.png)
 
-:happy: comment表已成功更新
+:wink: comment表已成功更新
 
 ### 存储过程
 
