@@ -33,15 +33,15 @@
    }
    http {
        server {
-           listen 8080;
-   				more_set_headers "Server: Purelightme/1.0";
-           location / {
-               default_type text/html;
-               content_by_lua_block {
-                   ngx.say("<p>hello, world</p>")
-               }
+       listen 8080;
+       more_set_headers "Server: Purelightme/1.0";
+       location / {
+           default_type text/html;
+           content_by_lua_block {
+               ngx.say("<p>hello, world</p>")
            }
-       }
+         }
+      }
    }
    ```
 
@@ -56,7 +56,8 @@
 
    ![7.2](https://raw.githubusercontent.com/Purelightme/one-day-one-ask/master/images/7.2.png)
 
-   
+### 最后
+
+还有一个 ”X-Powered-By“ 这个响应头也是经常可以看到，这个不是服务器软件输出的，而是应用层设置的，就拿PHP来说，php.ini里面有一个与之相关的配置项：expose_php，默认是On，效果就是响应头有”PHP/7.2.13“类似的东西，也是不安全的，改成Off，重启服务器软件(nginx)就可以删除了。
 
 ```2019-07-19```
-
