@@ -26,24 +26,36 @@
 2. 配置文件
 
    ```nginx
-   worker_processes  1;
+   worker_processes  2;
    error_log logs/error.log;
    events {
        worker_connections 1024;
    }
    http {
        server {
-       listen 8080;
-       more_set_headers "Server: Purelightme/1.0";
-       location / {
-           default_type text/html;
-           content_by_lua_block {
-               ngx.say("<p>hello, world</p>")
+           listen 8080;
+   	      root html;
+       		more_set_headers "Server: Purelightme/1.0";
+           location / {
+               default_type text/html;
+               content_by_lua_block {
+                   ngx.say("<p>hello, world</p>")
+               }
            }
-         }
-      }
+   				location ~ \.php$ {
+   	    			try_files $uri /index.php =404;
+               fastcgi_pass 127.0.0.1:9000;
+               fastcgi_index index.php;
+               fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+               include fastcgi_params;
+   				}
+       }
    }
    ```
+
+   相关文件目录：
+
+   ![7.3](https://raw.githubusercontent.com/Purelightme/one-day-one-ask/master/images/7.3.png)
 
 3. 运行
 
