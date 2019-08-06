@@ -60,6 +60,9 @@ MyISAN和InnoDB都使用B+树来实现索引：
 
 ### 图解
 
-![8.1](https://raw.githubusercontent.com/Purelightme/one-day-one-ask/master/images/8.1.png)
+![8.1](images/8.1.png)
 
-![8.2](https://raw.githubusercontent.com/Purelightme/one-day-one-ask/master/images/8.2.png)
+![8.2](images/8.2.png)
+
+```2019-07-28```
+

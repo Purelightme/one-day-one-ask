@@ -55,7 +55,7 @@
 
    相关文件目录：
 
-   ![7.3](https://raw.githubusercontent.com/Purelightme/one-day-one-ask/master/images/7.3.png)
+   ![7.3](images/7.3.png)
 
 3. 运行
 
@@ -66,7 +66,7 @@
 
 4. 效果
 
-   ![7.2](https://raw.githubusercontent.com/Purelightme/one-day-one-ask/master/images/7.2.png)
+   ![7.2](images/7.2.png)
 
 ### 最后
 

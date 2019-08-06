@@ -82,15 +82,15 @@ listen stats
 
 1，这个是我本地80端口的laradock项目首页
 
-![6.1](https://raw.githubusercontent.com/Purelightme/one-day-one-ask/master/images/6.1.png)
+![6.1](images/6.1.png)
 
 2，这个是新建的docker容器，映射到本机81端口的nginx默认欢迎页
 
-![6.2](https://raw.githubusercontent.com/Purelightme/one-day-one-ask/master/images/6.2.png)
+![6.2](images/6.2.png)
 
 3，还有一个自带的状态监控页：
 
-![6.3](https://raw.githubusercontent.com/Purelightme/one-day-one-ask/master/images/6.3.png)
+![6.3](images/6.3.png)
 
 ```2019-07-18```
 

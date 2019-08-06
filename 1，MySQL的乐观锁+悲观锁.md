@@ -1,6 +1,6 @@
 ```以下所有讨论都是基于MySQL的Innodb引擎```
 
-![1](https://raw.githubusercontent.com/Purelightme/one-day-one-ask/master/images/1.1.png)
+![1](images/1.1.png)
 
 ### 乐观锁
 
@@ -44,25 +44,25 @@ update products set sales=sales+1,version=version+1where id={id} and version={ve
 
 窗口A操作：
 
-![2](https://raw.githubusercontent.com/Purelightme/one-day-one-ask/master/images/1.2.png)
+![2](images/1.2.png)
 
 窗口B操作：
 
-![1.3](https://raw.githubusercontent.com/Purelightme/one-day-one-ask/master/images/1.3.png)
+![1.3](images/1.3.png)
 
 #### 共享锁
 
 窗口A操作：
 
-![1.4](https://raw.githubusercontent.com/Purelightme/one-day-one-ask/master/images/1.4.png)
+![1.4](images/1.4.png)
 
 窗口B操作：
 
-![1.4](https://raw.githubusercontent.com/Purelightme/one-day-one-ask/master/images/1.4.png)
+![1.4](images/1.4.png)
 
 窗口A再操作：
 
-![1.5](https://raw.githubusercontent.com/Purelightme/one-day-one-ask/master/images/1.5.png)
+![1.5](images/1.5.png)
 
 额，问题解决了，在有两个事务同时持有同一行的共享锁的时候，两边都是不能修改数据的。如果一行只有一个共享锁，那这个共享锁是可以修改数据的。
 

@@ -52,7 +52,7 @@ UPDATE `user` SET name='test' where id=1;
 
 #### 查看结果
 
-![5.1](https://raw.githubusercontent.com/Purelightme/one-day-one-ask/master/images/5.1.png)
+![5.1](images/5.1.png)
 
 :wink: comment表已成功更新
 

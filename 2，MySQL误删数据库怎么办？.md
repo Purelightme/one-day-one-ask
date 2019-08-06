@@ -21,17 +21,17 @@ server-id=1
 
 #### 创建数据库test，并添加测试数据
 
-![2.1](https://raw.githubusercontent.com/Purelightme/one-day-one-ask/master/images/2.1.png)
+![2.1](images/2.1.png)
 
 #### 做全量备份
 
-![2.2](https://raw.githubusercontent.com/Purelightme/one-day-one-ask/master/images/2.2.png)
+![2.2](images/2.2.png)
 
-![2.3](https://raw.githubusercontent.com/Purelightme/one-day-one-ask/master/images/2.3.png)
+![2.3](images/2.3.png)
 
 #### 模拟添加数据，并且删除数据表users
 
-![2.4](https://raw.githubusercontent.com/Purelightme/one-day-one-ask/master/images/2.4.png)
+![2.4](images/2.4.png)
 
 #### 恢复数据
 
@@ -45,23 +45,23 @@ server-id=1
 
 
 
-![2.5](https://raw.githubusercontent.com/Purelightme/one-day-one-ask/master/images/2.5.png)手动删除binlog转化为sql文件后不需要的sql，比如drop语句：
+![2.5](images/2.5.png)手动删除binlog转化为sql文件后不需要的sql，比如drop语句：
 
 
 
-![2.6](https://raw.githubusercontent.com/Purelightme/one-day-one-ask/master/images/2.6.png)先导入全量备份：
+![2.6](images/2.6.png)先导入全量备份：
 
 ```mysql -uroot -proot < test.sql```
 
 查看数据库，现在已经有全量备份的数据了：
 
-![2.7](https://raw.githubusercontent.com/Purelightme/one-day-one-ask/master/images/2.7.png)
+![2.7](images/2.7.png)
 
 再导入增量binlog数据：
 
-![2.8](https://raw.githubusercontent.com/Purelightme/one-day-one-ask/master/images/2.8.png)虽然报错了，但是我查看mysql，数据已经恢复成功了：
+![2.8](images/2.8.png)虽然报错了，但是我查看mysql，数据已经恢复成功了：
 
-![2.9](https://raw.githubusercontent.com/Purelightme/one-day-one-ask/master/images/2.9.png)
+![2.9](images/2.9.png)
 
 ### 总结
 
