@@ -68,3 +68,6 @@ docker inspect --format='{{.NetworkSettings.IPAddress}}' mysql5.7-master
 接下来，就可以开始测试啦~
 
 另外如果不是一开始就准备搭建主从，应该先将master进行mysqldump备份，导入slave后，再进行配置，以保持主从数据一致。
+
+```2019-10-08```
+
