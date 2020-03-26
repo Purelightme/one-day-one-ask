@@ -16,6 +16,8 @@ select * from employees limit 250000,30
 select * from (select emp_no from employees limit 250000,30) a,employees b where a.emp_no = b.emp_no
 ```
 
+原理：能减少回表次数，参考：[牛逼：一张900万的数据表，17s执行的SQL优化到300ms](https://mp.weixin.qq.com/s/Mk-JmcrjODszYwr0bNV2MQ)
+
 ###### 业务层优化
 
 ```sql
