@@ -1,0 +1,118 @@
+## 缘由
+
+在PHP项目的开发中，我们经常会引用一些第三方的依赖，也就是 composer package ，当我们在项目里面运行 ``composer require``
+
+的时候，默认地，composer 会从 github，packagist，等等其他仓库下载我们的依赖项，这大概率是一个耗时操作，从10多秒到十多分钟的都有，有的甚至都下载不下来。
+
+为了解决这一问题，同时也解决公司内部使用的代码不想开源出去等需求，私有composer仓库就出现了，官方推出的 satis 完美实现了这一目的。
+
+## 搭建
+
+现在本地创建一个 satis 项目:
+
+```composer create-project composer/satis  ```
+
+创建完成之后，在项目根目录下面建一个 satis.json 文件，该文件是整个 satis 项目的核心配置，主要描述了仓库的名称，地址，以及package信息，实例：
+
+```php
+{
+  "name": "Purelightme Composer Repositories",
+  "homepage": "http://satis.com",
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "https://github.com/Purelightme/reco4life"
+    }
+  ],
+  "require": {
+    "purelightme/reco4life": "*"
+  },
+  "archive": {
+      "directory": "dist",
+      "format": "zip"
+  },
+  "require-dependencies": true
+}
+```
+
+具体参数含义可参考：https://getcomposer.org/doc/articles/handling-private-packages-with-satis.md 这里面有关于该配置文件的详细描述。
+
+### 构建
+
+构建的目的是将配置文件里面定义的 package 按照定义的方式拉到本地来。命令：
+
+```shell
+php -d memory_limit=1000M bin/satis build ./satis.json public
+```
+
+> 在运行构建过程中，我一共遇到2个问题，一个是报错，Class not found 啥来着，composer update 后解决了；再就是内存不足的问题，直接加上 -d 参数设置就行了。
+
+如果设置了 archive 参数，构建过程将生成 public 目录，里面存放着我们定义的 package ，还有个 dist 目录，压缩的版本，composer require 的时候可以加速。
+
+### 开启服务
+
+要让我们的 Composer 仓库运行起来，我们要做的仅仅是建一个web服务，指向public目录即可。nginx示例：
+
+```nginx
+server {
+    listen       80;
+    server_name  satis.com;
+
+    access_log  /var/log/nginx/purelight.me.access.log  main;
+    error_log /var/log/nginx/satis.com.error.log;
+    root   /var/www/html/satis/public;
+
+    location / {
+        index  index.html index.php;
+    }
+
+    error_page   500 502 503 504  /50x.html;
+    location = /50x.html {
+        root /usr/share/nginx/html;
+    }
+
+    location ~ \.php$ {
+        fastcgi_pass   fpm;
+        fastcgi_index  index.php;
+        fastcgi_param  SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        include        fastcgi_params;
+    }
+}
+```
+
+访问本地 http://satis.com：
+
+![16.1](images/16.1.png)
+
+大概就长这样，要使用该仓库，只需在项目里面的 composer.json 文件里面定义我们的仓库：
+
+```
+{
+	"repositories":[
+		{
+			"type":"composer",
+			"url":"http://satis.com"
+		}
+	],
+	"config":{
+		"secure-http": false //这一行是允许http下载，否则下载不了，要https
+	}
+}
+```
+
+### 测试一下
+
+steps：
+
+- 新建test目录，composer init 一路回车。
+- composer require purelightme/reco4life -vvv（查看详细信息，观察是否是从satis.com下载的） 
+
+结果：
+
+![16.2](images/16.2.png)
+
+可以看到是从satis.com下载的。
+
+### 总结
+
+该工具主要是加速下载过程，适合公司内部使用，提高代码复用，拒绝到处copy，拒绝vendor入版本控制，积累成果，体验飞一般的感觉。
