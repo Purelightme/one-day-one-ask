@@ -6,7 +6,7 @@ php扩展开发入门，开发环境搭建，使用c语言实现一个php now()�
 
 1. 基于centos的docker镜像，在容器里面源码编译php7.2，使用最简参数安装方式，大概过程：
 
-```
+```shell
 docker run -it --name php-ext-dev centos bash
 cd /usr/local/src
 yum install -y wget
@@ -22,7 +22,7 @@ yum install -y libxml2-devel sqlite-devel
 
 2. 使用ext_skel工具生成php扩展基本骨架
 
-```
+```shell
 cd /usr/local/src/php-7.4.5/ext
 php ext_skel.php --help
 php ext_skel.php --ext purelightme
@@ -37,7 +37,7 @@ vi purelightme.c
 
 其实这个里面已经帮我们写了两个函数purelightme_test1和purelightme_test2，主要是打印扩展成功加载的信息，我再加一个函数now吧，返回时间戳。
 
-```
+```c
 #include<time.h>
 ...
 PHP_FUNCTION(now)
@@ -58,7 +58,7 @@ static const zend_function_entry purelightme_functions[] = {
 
 ### 安装扩展
 
-```
+```shell
 cd purelightme
 ./configure --with-php-config=/usr/local/php/bin/php-config
 make && make install
@@ -79,7 +79,7 @@ purelightme_test1();
 
 ### 环境打包推送Dockerhub
 
-```dock
+```shell
 docker commit -a "scl" -m "php-ext develepment env" 0610dfd6ef96 php-ext:v1
 docker tag php-ext:v1 purelightme/php-ext-env
 docker push purelightme/php-ext-env

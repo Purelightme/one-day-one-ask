@@ -153,7 +153,6 @@ PHP_METHOD(Child,getName)
 
 const zend_function_entry child_methods[] = {
         ZEND_ME(Child, getName, NULL, ZEND_ACC_PUBLIC)
-        ZEND_ME(Child,setName2,NULL,ZEND_ACC_PUBLIC)
         {NULL, NULL, NULL}
 };
 ```
