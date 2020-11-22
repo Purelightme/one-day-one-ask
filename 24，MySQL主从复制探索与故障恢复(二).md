@@ -1,4 +1,4 @@
-接上篇 [MySQL主从复制探索与故障恢复(二)](http://www.baidu.com) 。
+接上篇 [MySQL主从复制探索与故障恢复(二)](https://www.jianshu.com/p/d08136c12fb9) 。
 
 #### 从库执行写操作会发生什么？
 
