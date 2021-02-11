@@ -166,7 +166,7 @@ func json()  {
 
 ### 效果
 
-源码：[client.go]()
+源码：[client.go](https://github.com/Purelightme/guzzle-go/blob/main/client.go)
 
 ![29-1](images/29-1.png)
 
