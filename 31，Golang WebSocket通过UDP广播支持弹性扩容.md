@@ -171,7 +171,7 @@ func handleUdpMsg(msg []byte)  {
 
 main.go：
 
-![32-2](images/32-2.png)
+![31-2](images/31-2.png)
 
 图片生成使用的工具是：[https://github.com/matsuyoshi30/germanium](https://github.com/matsuyoshi30/germanium)
 
@@ -201,13 +201,13 @@ ws.send("{\"user_id\":2,\"data\":\"haha\"}")
 
 在 windows 端成功看到用户2收到了消息，部分截图如下：
 
-<img src="images/32-3.jpeg" alt="32-3" style="zoom: 25%;" />
+<img src="images/31-3.jpeg" alt="31-3" style="zoom: 25%;" />
 
-<img src="images/32-4.jpeg" alt="32-4" style="zoom:25%;" />
+<img src="images/31-4.jpeg" alt="31-4" style="zoom:25%;" />
 
-<img src="images/32-5.jpeg" alt="32-5" style="zoom:25%;" />
+<img src="images/31-5.jpeg" alt="32-5" style="zoom:25%;" />
 
-<img src="images/32-6.jpeg" alt="32-6" style="zoom:25%;" />
+<img src="images/31-6.jpeg" alt="32-6" style="zoom:25%;" />
 
 ### 总结
 
