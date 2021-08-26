@@ -189,7 +189,7 @@ GAP锁冲突，验证了主键索引上加的是临键锁，即Next-Key lock，�
 
 可见，c2=20 被加上了临键锁，主键20被加上记录锁，另外(20,21)是有一个GAP锁，因为最后一个记录的c2值是21，类型是int，所以这个GAP没什么意义。此时插入c2=15的值被阻塞，因为(11,20)有个GAP锁：
 
-![38-25](/Users/purelightme/Desktop/one-day-one-ask/images/38-25.png)
+![38-25](images/38-25.png)
 
 ![38-26](images/38-26.png)
 
