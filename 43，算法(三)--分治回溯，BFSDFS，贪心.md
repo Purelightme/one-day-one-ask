@@ -251,6 +251,86 @@ func dfs(x, y int, grid [][]byte) {
 }
 ```
 
+#### [733. 图像渲染](https://leetcode-cn.com/problems/flood-fill/)
+
+```go
+func floodFill(image [][]int, sr int, sc int, newColor int) [][]int {
+    dx := []int{0,1,0,-1}
+    dy := []int{1,0,-1,0}
+    oldColor := image[sr][sc]
+    if oldColor == newColor {
+        return image
+    }
+    image[sr][sc] = newColor
+    for i := 0; i < 4; i++ {
+        x := sr + dx[i]
+        y := sc + dy[i]
+        if x >= 0 && x < len(image) && y >= 0 && y < len(image[0]) && image[x][y] == oldColor {
+            floodFill(image,x,y,newColor)
+        }
+    }
+    return image
+}
+```
+
+#### [130. 被围绕的区域](https://leetcode-cn.com/problems/surrounded-regions/)
+
+```go
+func solve(board [][]byte)  {
+    m := len(board)
+    n := len(board[0])
+    //上下两排
+    for i := 0; i < n; i++ {
+        if board[0][i] == 'O' {
+            dfs(board,0,i)
+        }
+        if board[m-1][i] == 'O' {
+            dfs(board,m-1,i)
+        }
+    }
+    //左右两列
+    for j := 0; j < m; j++ {
+        if board[j][0] == 'O' {
+            dfs(board,j,0)
+        }
+        if board[j][n-1] == 'O' {
+            dfs(board,j,n-1)
+        }
+    }
+
+    for a := 0; a < m; a++ {
+        for b := 0; b < n; b++ {
+            if board[a][b] == 'O' {
+                board[a][b] = 'X'
+            }
+        }
+    }
+
+    for c := 0; c < m; c++ {
+        for d := 0; d < n; d++ {
+            if board[c][d] == 'Y' {
+                board[c][d] = 'O'
+            }
+        }
+    }
+}
+
+func dfs(board [][]byte,i,j int) {
+    board[i][j] = 'Y'
+    dx := []int{-1,0,1,0}
+    dy := []int{0,1,0,-1}
+    for z := 0; z < 4; z++ {
+        x := i + dx[z]
+        y := j + dy[z]
+        if x >= 0 && x < len(board) && y >= 0 && y < len(board[0]) && board[x][y] == 'O' {
+            dfs(board,x,y)
+        }
+    }
+}
+```
+
+
+
 ###贪心算法
 
 #### [455. 分发饼干](https://leetcode-cn.com/problems/assign-cookies/)
