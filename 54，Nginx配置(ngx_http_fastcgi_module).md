@@ -1,0 +1,56 @@
+```
+Directives
+     fastcgi_bind
+     fastcgi_buffer_size
+     fastcgi_buffering
+     fastcgi_buffers
+     fastcgi_busy_buffers_size
+     fastcgi_cache
+     fastcgi_cache_background_update
+     fastcgi_cache_bypass
+     fastcgi_cache_key
+     fastcgi_cache_lock
+     fastcgi_cache_lock_age
+     fastcgi_cache_lock_timeout
+     fastcgi_cache_max_range_offset
+     fastcgi_cache_methods
+     fastcgi_cache_min_uses
+     fastcgi_cache_path
+     fastcgi_cache_purge
+     fastcgi_cache_revalidate
+     fastcgi_cache_use_stale
+     fastcgi_cache_valid
+     fastcgi_catch_stderr
+     fastcgi_connect_timeout
+     fastcgi_force_ranges
+     fastcgi_hide_header
+     fastcgi_ignore_client_abort
+     fastcgi_ignore_headers
+     fastcgi_index
+     fastcgi_intercept_errors
+     fastcgi_keep_conn
+     fastcgi_limit_rate
+     fastcgi_max_temp_file_size
+     fastcgi_next_upstream
+     fastcgi_next_upstream_timeout
+     fastcgi_next_upstream_tries
+     fastcgi_no_cache
+     fastcgi_param
+     fastcgi_pass
+     fastcgi_pass_header
+     fastcgi_pass_request_body
+     fastcgi_pass_request_headers
+     fastcgi_read_timeout
+     fastcgi_request_buffering
+     fastcgi_send_lowat
+     fastcgi_send_timeout
+     fastcgi_socket_keepalive
+     fastcgi_split_path_info
+     fastcgi_store
+     fastcgi_store_access
+     fastcgi_temp_file_write_size
+     fastcgi_temp_path
+Parameters Passed to a FastCGI Server
+Embedded Variables
+```
+
